@@ -1,0 +1,11 @@
+scalar Time
+
+type Booking {
+    id: ID!
+    information: String!
+    start_hour: Time!
+    end_hour: Time!
+    booking_date: Time!
+    user: User!
+    room: Room!
+}

@@ -1,0 +1,23 @@
+type Mutation {
+    createBooking(input: CreateBookingInput!): Booking!
+    updateBooking(id: ID!, input: UpdateBookingInput!): Booking!
+    deleteBooking(id: ID!): Booking!
+}
+
+input CreateBookingInput {
+  information: String!
+  startHour: Time!
+  endHour: Time!
+  bookingDate: Time
+  userID: ID!
+  roomID: ID!
+}
+
+input UpdateBookingInput {
+  information: String
+  startHour: Time
+  endHour: Time
+  bookingDate: Time
+  userID: ID
+  roomID: ID
+}

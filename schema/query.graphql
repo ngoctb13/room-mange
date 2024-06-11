@@ -1,0 +1,6 @@
+type Query {
+    GetRoom(id: ID!): Room
+    GetAllRooms: [Room!]!
+    bookingsByDate(date: Time!): [Booking!]!
+    bookingsByRoomAndDate(roomId: ID!, date: Time!): [Booking!]!
+}
