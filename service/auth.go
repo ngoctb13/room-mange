@@ -54,6 +54,7 @@ func (svc *authSvcImpl) GetRedirectLoginEndpoint(ctx context.Context, r *http.Re
 	return url, nil
 }
 
+// gigig
 // GetToken returns the token.
 func (svc *authSvcImpl) GetToken(ctx context.Context, request OAuthLoginCallbackRequest, r *http.Request) (ent.AuthenticationToken, error) {
 	oAuthToken, err := svc.oauthClient.GetOAuthTokenFromCallback(ctx, r, request.Code, request.State)
