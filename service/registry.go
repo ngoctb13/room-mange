@@ -33,6 +33,7 @@ func NewService(azureADOAuthClient azuread.AzureADOAuth, entClient *ent.Client, 
 	}
 }
 
+// hihih
 // Auth returns the AuthService.
 func (i serviceImpl) Auth() AuthService {
 	return i.authService

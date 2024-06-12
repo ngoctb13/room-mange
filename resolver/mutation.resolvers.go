@@ -9,21 +9,32 @@ import (
 	"fmt"
 	"room-reservation/ent"
 	graphql1 "room-reservation/graphql"
+	"strconv"
 )
 
 // CreateBooking is the resolver for the createBooking field.
 func (r *mutationResolver) CreateBooking(ctx context.Context, input ent.CreateBookingInput) (*ent.Booking, error) {
-	panic(fmt.Errorf("not implemented: CreateBooking - createBooking"))
+	return r.serviceRegistry.Booking().CreateBooking(ctx, input)
 }
 
 // UpdateBooking is the resolver for the updateBooking field.
 func (r *mutationResolver) UpdateBooking(ctx context.Context, id string, input ent.UpdateBookingInput) (*ent.Booking, error) {
-	panic(fmt.Errorf("not implemented: UpdateBooking - updateBooking"))
+	intID, err := strconv.Atoi(id)
+	if err != nil {
+		return nil, fmt.Errorf("invalid id format: %v", err)
+	}
+
+	return r.serviceRegistry.Booking().UpdateBooking(ctx, intID, input)
 }
 
 // DeleteBooking is the resolver for the deleteBooking field.
 func (r *mutationResolver) DeleteBooking(ctx context.Context, id string) (*ent.Booking, error) {
-	panic(fmt.Errorf("not implemented: DeleteBooking - deleteBooking"))
+	intID, err := strconv.Atoi(id)
+	if err != nil {
+		return nil, fmt.Errorf("invalid id format: %v", err)
+	}
+
+	return r.serviceRegistry.Booking().DeleteBooking(ctx, intID)
 }
 
 // Mutation returns graphql1.MutationResolver implementation.

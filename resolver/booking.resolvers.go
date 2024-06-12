@@ -6,19 +6,27 @@ package resolver
 
 import (
 	"context"
-	"fmt"
 	"room-reservation/ent"
+	"room-reservation/ent/booking"
 	graphql1 "room-reservation/graphql"
 )
 
 // User is the resolver for the user field.
 func (r *bookingResolver) User(ctx context.Context, obj *ent.Booking) (*ent.User, error) {
-	panic(fmt.Errorf("not implemented: User - user"))
+	return r.client.Booking.
+		Query().
+		Where(booking.ID(obj.ID)).
+		QueryUser().
+		Only(ctx)
 }
 
 // Room is the resolver for the room field.
 func (r *bookingResolver) Room(ctx context.Context, obj *ent.Booking) (*ent.Room, error) {
-	panic(fmt.Errorf("not implemented: Room - room"))
+	return r.client.Booking.
+		Query().
+		Where(booking.ID(obj.ID)).
+		QueryRoom().
+		Only(ctx)
 }
 
 // Booking returns graphql1.BookingResolver implementation.
