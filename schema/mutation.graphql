@@ -2,6 +2,9 @@ type Mutation {
     createBooking(input: CreateBookingInput!): Booking!
     updateBooking(id: ID!, input: UpdateBookingInput!): Booking!
     deleteBooking(id: ID!): Booking!
+    createRoom(input: CreateRoomInput!): Room!
+    updateRoom(id: ID!, input: UpdateRoomInput!): Room!
+    deleteRoom(id: ID!): Room!
 }
 
 input CreateBookingInput {
@@ -20,4 +23,14 @@ input UpdateBookingInput {
   bookingDate: Time
   userID: ID
   roomID: ID
+}
+
+input CreateRoomInput {
+    name: String!
+    capacity: Int!
+}
+
+input UpdateRoomInput {
+    name: String
+    capacity: Int
 }

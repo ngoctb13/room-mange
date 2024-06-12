@@ -9,27 +9,36 @@ import (
 	"fmt"
 	"room-reservation/ent"
 	graphql1 "room-reservation/graphql"
+	"strconv"
 	"time"
 )
 
 // GetRoom is the resolver for the GetRoom field.
 func (r *queryResolver) GetRoom(ctx context.Context, id string) (*ent.Room, error) {
-	panic(fmt.Errorf("not implemented: GetRoom - GetRoom"))
+	intID, err := strconv.Atoi(id)
+	if err != nil {
+		return nil, fmt.Errorf("invalid id format: %v", err)
+	}
+	return r.serviceRegistry.Room().GetRoomByID(ctx, intID)
 }
 
 // GetAllRooms is the resolver for the GetAllRooms field.
 func (r *queryResolver) GetAllRooms(ctx context.Context) ([]*ent.Room, error) {
-	panic(fmt.Errorf("not implemented: GetAllRooms - GetAllRooms"))
+	return r.serviceRegistry.Room().GetAllRooms(ctx)
 }
 
 // BookingsByDate is the resolver for the bookingsByDate field.
 func (r *queryResolver) BookingsByDate(ctx context.Context, date time.Time) ([]*ent.Booking, error) {
-	panic(fmt.Errorf("not implemented: BookingsByDate - bookingsByDate"))
+	return r.serviceRegistry.Booking().GetBookingsByDate(ctx, date)
 }
 
 // BookingsByRoomAndDate is the resolver for the bookingsByRoomAndDate field.
 func (r *queryResolver) BookingsByRoomAndDate(ctx context.Context, roomID string, date time.Time) ([]*ent.Booking, error) {
-	panic(fmt.Errorf("not implemented: BookingsByRoomAndDate - bookingsByRoomAndDate"))
+	intRoomID, err := strconv.Atoi(roomID)
+	if err != nil {
+		return nil, fmt.Errorf("invalid room ID format: %v", err)
+	}
+	return r.serviceRegistry.Booking().GetBookingsByRoomAndDate(ctx, intRoomID, date)
 }
 
 // Query returns graphql1.QueryResolver implementation.
